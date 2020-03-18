@@ -1,2 +1,2 @@
 # DBMSproject
-by Piyush Shandilya and Prajjwal Kumar
+by Piyush Shandilya and Prajjwal
