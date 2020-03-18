@@ -3,11 +3,15 @@ import './App.css';
 import Navigation from './components/Navigation';
 import Register from './components/Register';
 import Signin from './components/Signin';
+import CardList from './components/CardList';
+import Scroll from './components/Scroll';
+import { robots } from './components/robots'
 import 'tachyons';
 class App extends Component {
 	constructor() {
 		super();
 		this.state = { apiResponse: "",
+						robots: [],
 						route: 'signin',
 						isSignedIn:false,
 						user: {
@@ -33,9 +37,9 @@ class App extends Component {
 	  }
 
   onRouteChange = (route) => {
-    if (route === 'signin') {
+    if (route === 'signin' ) {
       this.setState({isSignedIn: false})
-    } else if (route === 'home') {
+    } else if (route === 'home' || route === 'cart') {
       this.setState({isSignedIn: true})
     }
     this.setState({route: route});
@@ -50,7 +54,8 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		this.callAPI();
+		// this.callAPI();
+		this.setState({robots: robots})
 	}
 
 	render() {
@@ -61,13 +66,20 @@ class App extends Component {
 				<div className="">
 		        { route === 'home'
 		          ? <div>
-		              <p> home </p>
+		              <h1 className = 'athelas f1 '>Restaurant<br/>MENU</h1>
+						<Scroll>
+							<CardList robots={this.state.robots} />
+						</Scroll>
 		            </div>
 		          : (
-		             route === 'signin'
-		             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-		             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-		            )
+		          	 route === 'cart'
+		          	 ? <p>cart</p>
+					 :	(
+				         route === 'signin'
+    		             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+    		             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+		            	)		            
+					)
 		        }
 		        </div>	
 				
