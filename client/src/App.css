@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+.container{
+  background-image: url(./components/car3.jpg);
+  min-height: 100vh;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

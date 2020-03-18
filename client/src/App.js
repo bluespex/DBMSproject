@@ -1,12 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import Navigation from './components/Navigation';
+import Register from './components/Register';
+import Signin from './components/Signin';
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { apiResponse: "" };
+	constructor() {
+		super();
+		this.state = { apiResponse: "",
+						route: 'signin',
+						isSignedIn:false,
+						user: {
+							id: '',
+							name: '',
+							email: ''
+						} 
+		};
 	}
+
+	  onInputChange = (event) => {
+	    this.setState({input: event.target.value});
+	  }
+
+	loadUser = (data) => {
+	    this.setState({user: {
+	      id: data.id,
+	      name: data.name,
+	      email: data.email,
+	      entries: data.entries,
+	      joined: data.joined
+	    }})
+	  }
+
+  onRouteChange = (route) => {
+    if (route === 'signin') {
+      this.setState({isSignedIn: false})
+    } else if (route === 'home') {
+      this.setState({isSignedIn: true})
+    }
+    this.setState({route: route});
+  }
+
 
 	callAPI() {
 		fetch("http://localhost:9000/testAPI")
@@ -20,16 +53,40 @@ class App extends Component {
 	}
 
 	render() {
+		const { isSignedIn, route  } = this.state;
 		return (
-			<div className="App">
-				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<h1 className="App-title">Welcome to React</h1>
-				</header>
-				<p className="App-intro">{this.state.apiResponse}</p>
+			<div className="App container">
+				<Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+				<div className="">
+		        { route === 'home'
+		          ? <div>
+		              <p> home </p>
+		            </div>
+		          : (
+		             route === 'signin'
+		             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+		             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+		            )
+		        }
+		        </div>	
+				
 			</div>
+
 		);
 	}
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
