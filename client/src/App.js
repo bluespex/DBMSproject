@@ -3,6 +3,7 @@ import './App.css';
 import Navigation from './components/Navigation';
 import Register from './components/Register';
 import Signin from './components/Signin';
+import 'tachyons';
 class App extends Component {
 	constructor() {
 		super();
