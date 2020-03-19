@@ -24,7 +24,10 @@ class App extends Component {
 			<div className="App">
 				<header className="App-header">
 					<img src={logo} className="App-logo" alt="logo" />
-					<h1 className="App-title">Welcome to React</h1>
+					<h1 className="App-title">Welcome to Food Delivering Website</h1>
+					<h4> Made by :</h4>
+					<h4> Piyush Shandil </h4>
+					<h4> Prajjwal Kumar </h4>
 				</header>
 				<p className="App-intro">{this.state.apiResponse}</p>
 			</div>
