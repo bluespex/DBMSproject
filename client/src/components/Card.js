@@ -3,7 +3,7 @@ import React from 'react';
 const Card = ({ id, name, detail, price }) => {
 	return (
 		<div className = ' tc bg-light-green dib pa3 br3 ma2 grow bw-2 shadow-5'>
-			<img alt = 'Robot' src = {`https://robohash.org/${id}?200x200`} />
+			<img alt = 'Robot' src = {require(`./images/pic${id}.jpg`)} />
 			<div>
 				<h2>{name}</h2>
 				<p className='f5 b'>{detail}</p><br/>

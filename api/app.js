@@ -93,4 +93,11 @@ app.post('/register', (req,res) => {
 		.catch(err => res.status(400).json(err))
 })
 
+app.get('/menu', (req,res) => {
+	db.select('*')
+		.from('menu')
+		.then(menu => res.json(menu))
+		.catch(err => res.status(400).json(err))
+})
+
 module.exports = app;

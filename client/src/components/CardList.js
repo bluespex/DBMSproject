@@ -11,7 +11,7 @@ const CardList = ({robots}) => {
 						key = {user.id} 
 						id={user.id} 
 						name={user.name} 
-						detail={user.detail} 
+						detail={user.details} 
 						price={user.price}
 						 />
 					);

@@ -5,7 +5,7 @@ import Register from './components/Register';
 import Signin from './components/Signin';
 import CardList from './components/CardList';
 import Scroll from './components/Scroll';
-import { robots } from './components/robots'
+// import { robots } from './components/robots'
 import 'tachyons';
 class App extends Component {
 	constructor() {
@@ -55,7 +55,11 @@ class App extends Component {
 
 	componentDidMount() {
 		// this.callAPI();
-		this.setState({robots: robots})
+		fetch("http://localhost:9000/menu")
+		.then(res => res.json())
+		.then(res => this.setState({robots: res}))
+		.catch(err => err);
+		// this.setState({robots: robots})
 	}
 
 	render() {
