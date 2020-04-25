@@ -100,4 +100,39 @@ app.get('/menu', (req,res) => {
 		.catch(err => res.status(400).json(err))
 })
 
+app.put('/buy', (req,res) => {
+	const {user_id, menu_id} = req.body;
+
+	db('cart').where({
+		user_id : user_id,
+		menu_id : menu_id
+	}).returning('quantity')
+	.increment({
+		quantity : 1
+	}).then(cnt => res.json(cnt))
+	.catch(
+		db('cart')
+		.returning('menu_id')
+		.insert({
+			user_id : user_id,
+			menu_id : menu_id,
+			quantity : 1 
+		}).then(id => res.json(id))
+	)
+})
+
+app.get('/cart', (req,res) => {
+	const {user_id} = req.body;
+
+	db('cart')
+	  .join('menu', 'cart.menu_id', '=', 'menu.id')
+	  .select('name','quantity','price')
+	  .where({user_id : user_id})
+		.then(data => {
+			res.json(data);
+		})
+		.catch(err => res.json("error occured"))
+
+})
+
 module.exports = app;
