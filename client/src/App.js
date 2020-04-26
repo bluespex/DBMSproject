@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Signin from './components/Signin';
 import CardList from './components/CardList';
 import Scroll from './components/Scroll';
+import Cart from './components/cart'
 // import { robots } from './components/robots'
 import 'tachyons';
 class App extends Component {
@@ -14,11 +15,13 @@ class App extends Component {
 						robots: [],
 						route: 'signin',
 						isSignedIn:false,
+						result: [], 
+						sum: "0",
 						user: {
 							id: '',
 							name: '',
 							email: ''
-						} 
+						}
 		};
 	}
 
@@ -62,22 +65,47 @@ class App extends Component {
 		// this.setState({robots: robots})
 	}
 
+	fun = () => {
+		fetch('http://localhost:9000/cart', {
+	      method: 'post',
+	      headers: {'Content-Type': 'application/json'},
+	      body: JSON.stringify({
+	        user_id: this.state.user.id
+	      })
+	    })
+	      .then(response => response.json())
+	      .then(res => {
+	        this.setState({result: res})
+	      })
+    }
+
+    sum = () => {
+    	var s = 0;
+    	this.state.result.map((d, idx) => {
+         	s = s+ (d.quantity*d.price);
+       	})
+       	this.setState({sum: s});
+
+    }
+
 	render() {
 		const { isSignedIn, route  } = this.state;
 		return (
 			<div className="App container">
+				<div onClick={this.fun}>
 				<Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
-				<div className="">
+				</div>
+				<div onClick={this.sum} className="">
 		        { route === 'home'
 		          ? <div>
 		              <h1 className = 'athelas f1 '>Restaurant<br/>MENU</h1>
 						<Scroll>
-							<CardList robots={this.state.robots} />
+							<CardList robots={this.state.robots} ID={this.state.user.id} />
 						</Scroll>
 		            </div>
 		          : (
 		          	 route === 'cart'
-		          	 ? <p>cart</p>
+		          	 ?  <Cart result = {this.state.result} sum = {this.state.sum}/>
 					 :	(
 				         route === 'signin'
     		             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>

@@ -118,12 +118,15 @@ app.put('/buy', (req,res) => {
 			menu_id : menu_id,
 			quantity : 1 
 		}).then(id => res.json(id))
+		.catch(err => res.json(err))
+	// 	err => {
+	// console.log(1);
+	// }
 	)
 })
 
-app.get('/cart', (req,res) => {
+app.post('/cart', (req,res) => {
 	const {user_id} = req.body;
-
 	db('cart')
 	  .join('menu', 'cart.menu_id', '=', 'menu.id')
 	  .select('name','quantity','price')
@@ -134,5 +137,19 @@ app.get('/cart', (req,res) => {
 		.catch(err => res.json("error occured"))
 
 })
+
+// app.post('/sum', (req,res) => {
+// 	const {user_id} = req.body;
+// 	console.log(1);
+// 	db('cart')
+// 	  .join('menu', 'cart.menu_id', '=', 'menu.id')
+// 	  .sum('price','*','quantity')
+// 	  .where({user_id : user_id})
+// 		.then(data => {
+// 			res.json(data[0].sum);
+// 		})
+// 		.catch(err => res.json("error occured"))
+
+// })
 
 module.exports = app;
