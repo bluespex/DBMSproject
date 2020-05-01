@@ -1,7 +1,9 @@
 .App {
   text-align: center;
 }
-
+/* body { */
+  /* background-image: linear-gradient(to right, red , yellow); */
+/* } */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -29,10 +31,48 @@
 }
 
 .container{
-  background-image: url(./components/car3.jpg);
+  /* background-image: url(./components/car3.jpg); */
+  /* background-image: linear-gradient(to right, rgb(10, 123, 143) , rgb(10, 146, 62)); */
   min-height: 100vh;
 }
-
+.signin{
+  background-image: linear-gradient(to right, red , rgb(190, 12, 146));
+}
+.Sign{
+  background-image: linear-gradient(to right, red , yellow);
+}
+.button-mar{
+  margin-left: 20px;
+  margin-right: 10px;
+  float: left;
+  background-color:rgb(202, 209, 165);
+  }
+  .field-box {
+    margin-left: 1300px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 10%;
+    height: 30px;
+    border-radius: 4px;
+    position: relative;
+    background-color: rgb(192, 192, 156);
+    transition: 0.3s all;
+  }
+  .field-box:hover {
+    background-color:rgb(57, 58, 54);
+    box-shadow: 0px 4px 20px 0px rgba(73, 70, 70, 0.05);
+  }
+  .leftmar{
+    margin-left: 1300px;
+  }
+  .leftbutton{
+    margin-right: 80px;
+    float:right;
+  }
+  .price-filter{
+    margin-right: 50px;
+    float:right;
+  }
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
