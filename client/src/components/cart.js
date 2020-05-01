@@ -28,6 +28,7 @@ const Cart = ({result,sum,calc}) => {
 					
 				
 					</div>
+
 		         )
 		       	})
 	    	}
