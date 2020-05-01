@@ -13,7 +13,7 @@ const db = knex({
   connection: {
     host : '127.0.0.1',
     user : 'postgres',
-    password : 'piyush1999',
+    password : 'prpa2772928',
     database : 'dbms'
   }
 });
@@ -102,7 +102,13 @@ app.get('/menu', (req,res) => {
 
 app.put('/buy', (req,res) => {
 	const {user_id, menu_id} = req.body;
-
+	// let temp;
+	// db('menu').where({
+	// 	id : menu_id
+	// }).select('price')
+	// .then((x,temp) => {temp=x; })
+	// .catch(err => {console.log('error')})
+	// console.log(temp);
 	db('cart').where({
 		user_id : user_id,
 		menu_id : menu_id
@@ -129,7 +135,7 @@ app.post('/cart', (req,res) => {
 	const {user_id} = req.body;
 	db('cart')
 	  .join('menu', 'cart.menu_id', '=', 'menu.id')
-	  .select('name','quantity','price')
+	  .select('name','quantity','price','id')
 	  .where({user_id : user_id})
 		.then(data => {
 			res.json(data);
@@ -140,10 +146,10 @@ app.post('/cart', (req,res) => {
 
 // app.post('/sum', (req,res) => {
 // 	const {user_id} = req.body;
-// 	console.log(1);
+// 	// console.log(1);
 // 	db('cart')
 // 	  .join('menu', 'cart.menu_id', '=', 'menu.id')
-// 	  .sum('price','*','quantity')
+// 	  .sum('quantity')
 // 	  .where({user_id : user_id})
 // 		.then(data => {
 // 			res.json(data[0].sum);

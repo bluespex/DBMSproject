@@ -1,0 +1,30 @@
+
+.box {
+  display: flex;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 20px;
+}
+
+.item-img{
+  /* align-self:center; */
+  width: 100px;
+  margin-top: 12px;
+  margin-right: 25px;
+  margin-left: 150px;
+}
+.item {
+  font-size: 15px;
+  font-weight: 400;
+  color: #07000c;
+  display: block;
+  align-items: flex-start;
+  margin-bottom: 20 px;
+  
+}
+.item-desc{
+  align-self:flex-start;
+}
+.item{
+  display: flex;
+}

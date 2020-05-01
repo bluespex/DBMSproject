@@ -76,11 +76,11 @@ class App extends Component {
 	      .then(response => response.json())
 	      .then(res => {
 	        this.setState({result: res})
-	      })
+	      }).catch(err => {console.log("Empty")})
     }
 
-    sum = () => {
-    	var s = 0;
+	sum = () => {
+		var s = 0;
     	this.state.result.map((d, idx) => {
          	s = s+ (d.quantity*d.price);
        	})
@@ -92,25 +92,47 @@ class App extends Component {
 		const { isSignedIn, route  } = this.state;
 		return (
 			<div className="App container">
-				<div onClick={this.fun}>
+				<div className ="App signin" onClick={this.fun}>
 				<Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
 				</div>
-				<div onClick={this.sum} className="">
+				<div className="">
 		        { route === 'home'
 		          ? <div>
-		              <h1 className = 'athelas f1 '>Restaurant<br/>MENU</h1>
-						<Scroll>
+		              <h1 className = 'athelas f1 underline'>P4 CAFE</h1>
+					   	
+					   <h3 className="App leftmar"><b><i><u>Price Filter:</u></i></b></h3>
+					   <div >
+						<p className="App price-filter">Enter Starting Price : </p>
+						<input className="App field-box" type="text"></input>
+						<p className="App price-filter">Enter Ending Price : </p>
+						<input className="App field-box" type="text"></input>
+						</div>
+						<button className="App leftbutton">Submit</button>	
+						<button className="App button-mar">VEG</button>
+					   <button className="App button-mar">NON-VEG</button><br/>
+					   <br/>
+					   <p>   </p>
+					   <p>   </p>
+					   <br/>
+					   <h3 className='athelas f3'><i><u>MENU</u></i></h3>
 							<CardList robots={this.state.robots} ID={this.state.user.id} />
-						</Scroll>
+					
 		            </div>
 		          : (
 		          	 route === 'cart'
-		          	 ?  <Cart result = {this.state.result} sum = {this.state.sum}/>
-					 :	(
+		          	 ?  <Cart result = {this.state.result} sum = {this.state.sum} calc ={this.sum}/>
+					 :	
+					 
+					 (
 				         route === 'signin'
-    		             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-    		             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-		            	)		            
+						 ?
+						//  <div className = "App Sign">
+						 <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+						//  </div>
+    		             : 
+						//  <div className = "App Sign">
+						 <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>	
+						)		            
 					)
 		        }
 		        </div>	
