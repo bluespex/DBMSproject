@@ -100,6 +100,13 @@ app.get('/menu', (req,res) => {
 		.catch(err => res.status(400).json(err))
 })
 
+app.post('/price', (req,res) => {
+	const {left,right} = req.body;
+	db('menu').whereBetween('price', [left, right])
+		.then(menu => res.json(menu))
+		.catch(err => res.status(400).json(err))
+})
+
 app.put('/buy', (req,res) => {
 	const {user_id, menu_id} = req.body;
 	// let temp;
