@@ -4,7 +4,7 @@ import Navigation from './components/Navigation';
 import Register from './components/Register';
 import Signin from './components/Signin';
 import CardList from './components/CardList';
-import Scroll from './components/Scroll';
+// import Scroll from './components/Scroll';
 import Cart from './components/cart'
 // import { robots } from './components/robots'
 import 'tachyons';
@@ -17,6 +17,8 @@ class App extends Component {
 						isSignedIn:false,
 						result: [], 
 						sum: "0",
+						starting_price: 0,
+						ending_price: 100000,
 						user: {
 							id: '',
 							name: '',
@@ -25,16 +27,17 @@ class App extends Component {
 		};
 	}
 
-	  onInputChange = (event) => {
-	    this.setState({input: event.target.value});
-	  }
+
+
+		  onInputChange = (event) => {
+		    this.setState({input: event.target.value});
+		  }
 
 	loadUser = (data) => {
 	    this.setState({user: {
 	      id: data.id,
 	      name: data.name,
 	      email: data.email,
-	      entries: data.entries,
 	      joined: data.joined
 	    }})
 	  }
@@ -65,6 +68,40 @@ class App extends Component {
 		// this.setState({robots: robots})
 	}
 
+	onSPriceChange = (event) => {
+	   	this.setState({starting_price: event.target.value})
+	}
+	onEPriceChange = (event) => {
+	   	this.setState({ending_price: event.target.value})
+	}
+	priceFilter = () => {
+		fetch('http://localhost:9000/price', {
+	      method: 'post',
+	      headers: {'Content-Type': 'application/json'},
+	      body: JSON.stringify({
+	        left: this.state.starting_price,
+	        right: this.state.ending_price
+	      })
+	    })
+	    .then(res => res.json())
+		.then(res => this.setState({robots: res}))
+		.catch(err => err);
+	}
+
+	clear = () => {
+		fetch('http://localhost:9000/clear', {
+	      method: 'put',
+	      headers: {'Content-Type': 'application/json'},
+	      body: JSON.stringify({
+	        user_id: this.state.user.id
+	      })
+	    })
+	    .then(res => res.json())
+		.then(res => console.log(res))
+		.catch(err => err);
+		this.setState({sum:0});
+	}
+
 	fun = () => {
 		fetch('http://localhost:9000/cart', {
 	      method: 'post',
@@ -83,6 +120,7 @@ class App extends Component {
 		var s = 0;
     	this.state.result.map((d, idx) => {
          	s = s+ (d.quantity*d.price);
+         	return s;
        	})
        	this.setState({sum: s});
 
@@ -93,27 +131,28 @@ class App extends Component {
 		return (
 			<div className="App container">
 				<div className ="App signin" onClick={this.fun}>
-				<Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+				<Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} clear={this.clear}/>
 				</div>
 				<div className="">
 		        { route === 'home'
 		          ? <div>
 		              <h1 className = 'athelas f1 underline'>P4 CAFE</h1>
-					   	
-					   <h3 className="App leftmar"><b><i><u>Price Filter:</u></i></b></h3>
-					   <div >
-						<p className="App price-filter">Enter Starting Price : </p>
-						<input className="App field-box" type="text"></input>
-						<p className="App price-filter">Enter Ending Price : </p>
-						<input className="App field-box" type="text"></input>
-						</div>
-						<button className="App leftbutton">Submit</button>	
-						<button className="App button-mar">VEG</button>
-					   <button className="App button-mar">NON-VEG</button><br/>
-					   <br/>
-					   <p>   </p>
-					   <p>   </p>
-					   <br/>
+					   <div>
+						   <h3 className="App leftmar"><b><i><u>Price Filter:</u></i></b></h3>
+						   <div >
+							<p className="App price-filter">Enter Starting Price : </p>
+							<input onChange = {this.onSPriceChange} className="App field-box" type="text"></input>
+							<p className="App price-filter">Enter Ending Price : </p>
+							<input onChange = {this.onEPriceChange} className="App field-box" type="text"></input>
+							</div>
+							<button onClick = {this.priceFilter} className="App leftbutton">Submit</button>	
+							<button className="App button-mar">VEG</button>
+						   <button className="App button-mar">NON-VEG</button><br/>
+						   <br/>
+						   <p>   </p>
+						   <p>   </p>
+						   <br/>
+					   </div>
 					   <h3 className='athelas f3'><i><u>MENU</u></i></h3>
 							<CardList robots={this.state.robots} ID={this.state.user.id} />
 					
