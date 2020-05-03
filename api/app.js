@@ -13,7 +13,7 @@ const db = knex({
   connection: {
     host : '127.0.0.1',
     user : 'postgres',
-    password : 'prpa2772928',
+    password : 'piyush1999',
     database : 'dbms'
   }
 });
