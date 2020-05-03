@@ -107,6 +107,14 @@ app.post('/price', (req,res) => {
 		.catch(err => res.status(400).json(err))
 })
 
+app.put('/clear', (req,res) => {
+	const {user_id} = req.body;
+	db('cart')
+	  .where('user_id', user_id)
+	  .del()
+	  .then(rv => res.json(rv))
+})
+
 app.put('/buy', (req,res) => {
 	const {user_id, menu_id} = req.body;
 	// let temp;
