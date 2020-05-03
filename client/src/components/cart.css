@@ -24,6 +24,8 @@
 }
 .item-desc{
   align-self:flex-start;
+  text-align: left;
+  align-content: flex-start;
 }
 .item{
   display: flex;
