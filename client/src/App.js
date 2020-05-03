@@ -140,14 +140,10 @@ class App extends Component {
 					   <div>
 						   <h3 className="App leftmar"><b><i><u>Price Filter:</u></i></b></h3>
 						   <div >
-							<p className="App price-filter">Enter Starting Price : </p>
-							<input onChange = {this.onSPriceChange} className="App field-box" type="text"></input>
-							<p className="App price-filter">Enter Ending Price : </p>
-							<input onChange = {this.onEPriceChange} className="App field-box" type="text"></input>
+							<input onChange = {this.onSPriceChange} className="App field-box" placeholder="Enter Starting Price" type="text"></input>
+							<input onChange = {this.onEPriceChange} className="App field-box" placeholder="Enter Ending Price" type="text"></input>
 							</div>
 							<button onClick = {this.priceFilter} className="App leftbutton">Submit</button>	
-							<button className="App button-mar">VEG</button>
-						   <button className="App button-mar">NON-VEG</button><br/>
 						   <br/>
 						   <p>   </p>
 						   <p>   </p>
