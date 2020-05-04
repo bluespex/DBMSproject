@@ -1,42 +1,41 @@
 import React from 'react';
-import './cart.css';
+import './Cart.css';
 
-const Cart = ({result,sum,calc}) => { 
+const Cart = ({idx,id,name,quantity,price,user,func}) => { 
 	return(
 		
 	    <div>
-			<h1 className= "tc">CART</h1>
-	    	{
-				
-				result.map((d, idx) => {
-		         return (
-					 // <li key={idx}>{d.name}</li>
-					 <div className="box" key={idx}>
+			<div className="box">
 					
-		         	<li className= "cart item" key={idx}>
+		         	<li className= "cart item">
 				     <div className = "cart item-img">
-					 <img alt = 'Robot' src = {require(`./images/pic${d.id}.jpg`)} />
+					 <img alt = 'Robot' src = {require(`./images/pic${id}.jpg`)} />
 					 </div>
-					<div className="cart item-desc" key={idx}>	
+					<div className="cart item-desc" onClick={func()}>	
 					    <p> </p>
-						<p><b>{d.name}</b></p>  
-						<p><b>Quantity : {d.quantity}</b></p>
-						<p><b>Price : Rs.{d.price}</b></p>
-						<button>Remove</button>
+						<p><b>{name}</b></p>  
+						<p><b>Quantity : {quantity}</b></p>
+						<p><b>Price : Rs.{price}</b></p>
+						<button onClick={()=>{
+						fetch('http://localhost:9000/remove', {
+							method: 'put',
+							headers: {'Content-Type': 'application/json'},
+							body: JSON.stringify({
+							  user_id: user,
+							  menu_id: id
+							})
+						  })
+							.then(response => response.json());
+							
+							}
+						}>Remove</button>
 					    <br/>
 					</div>
 					</li>
 					
 				
 					</div>
-
-		         )
-		       	})
-	    	}
-	    	<div>
-		    	<button className='waves-effect waves-light btn pink' onClick ={()=>{calc()}}>Total :</button>
-				<p className="tc">{sum}</p>
-		    </div>
+	    
 	    </div>
 
 			

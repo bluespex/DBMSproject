@@ -18,10 +18,10 @@ const db = knex({
   }
 });
 
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const bodyParser = require('body-parser'); //convert object into json
+const cors = require('cors'); //search on google - cross origin resource share
 
-const saltRounds = 10;
+const saltRounds = 10; // used in encrpytion of password
 
 var app = express();
 
@@ -38,10 +38,10 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req,res) => {
-	res.send(database.users);
+	res.send(database.users); // sending users' databese to frontend : just checking 
 })
 
-app.post('/signin', (req,res) => {
+app.post('/signin', (req,res) => { // Data submit krne ke liye post use krte hai and to get response acc. to data from frontend
 
 	db.select('email','hash').from('login')
 	.where('email','=',req.body.email)
@@ -157,6 +157,15 @@ app.post('/cart', (req,res) => {
 		})
 		.catch(err => res.json("error occured"))
 
+})
+
+app.put('/remove', (req,res) => {
+	const {user_id, menu_id} = req.body;
+	db('cart').where({
+		user_id : user_id,
+		menu_id : menu_id
+	}).del()
+	  .then(rv => res.json(rv))
 })
 
 // app.post('/sum', (req,res) => {
