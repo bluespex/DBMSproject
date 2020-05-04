@@ -3,7 +3,7 @@ import './card.css';
 
 const Card = ({ id, name, detail, price, user }) => {
 	return (
-		<div className = ' tc bg-light-green dib pa3 br8 ma1 grow bw-2 shadow-3' 
+		<div className = 'tc bg-light-green dib pa3 br8 ma1 grow bw-2 shadow-3' 
 			onClick={() => 
 				 		fetch('http://localhost:9000/buy', {
 					      method: 'put',

@@ -47,31 +47,23 @@
   float: left;
   background-color:rgb(202, 209, 165);
   }
-  .field-box {
-    margin-left: 1300px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    width: 10%;
-    height: 30px;
-    border-radius: 4px;
-    position: relative;
-    background-color: rgb(192, 192, 156);
-    transition: 0.3s all;
+  .price{
+    flex: right;
   }
-  .field-box:hover {
+  .field-box {
+ margin-right: 10px;
+  }
+  /* .field-box:hover {
     background-color:rgb(57, 58, 54);
     box-shadow: 0px 4px 20px 0px rgba(73, 70, 70, 0.05);
-  }
-  .leftmar{
+  } */
+  /* .leftmar{
     margin-left: 1300px;
-  }
+  } */
   .leftbutton{
-    margin-right: 80px;
-    float:right;
-  }
-  .price-filter{
-    margin-right: 50px;
-    float:right;
+    margin-top: 10px;
+    /* margin-right: 80px; */
+    /* float:right; */
   }
 @keyframes App-logo-spin {
   from {

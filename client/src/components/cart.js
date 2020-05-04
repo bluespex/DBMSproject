@@ -22,6 +22,7 @@ const Cart = ({result,sum,calc}) => {
 						<p><b>{d.name}</b></p>  
 						<p><b>Quantity : {d.quantity}</b></p>
 						<p><b>Price : Rs.{d.price}</b></p>
+						<button>Remove</button>
 					    <br/>
 					</div>
 					</li>

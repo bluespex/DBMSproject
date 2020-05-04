@@ -138,15 +138,13 @@ class App extends Component {
 		          ? <div>
 		              <h1 className = 'athelas f1 underline'>P4 CAFE</h1>
 					   <div>
+						   <div className="App price">
 						   <h3 className="App leftmar"><b><i><u>Price Filter:</u></i></b></h3>
-						   <div >
 							<input onChange = {this.onSPriceChange} className="App field-box" placeholder="Enter Starting Price" type="text"></input>
 							<input onChange = {this.onEPriceChange} className="App field-box" placeholder="Enter Ending Price" type="text"></input>
-							</div>
 							<button onClick = {this.priceFilter} className="App leftbutton">Submit</button>	
-						   <br/>
-						   <p>   </p>
-						   <p>   </p>
+							</div>
+							
 						   <br/>
 					   </div>
 					   <h3 className='athelas f3'><i><u>MENU</u></i></h3>
