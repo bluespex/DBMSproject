@@ -4,8 +4,9 @@ import Navigation from './components/Navigation';
 import Register from './components/Register';
 import Signin from './components/Signin';
 import CardList from './components/CardList';
+import CartList from './components/CartList';
 // import Scroll from './components/Scroll';
-import Cart from './components/cart'
+// import Cart from './components/Cart'
 // import { robots } from './components/robots'
 import 'tachyons';
 class App extends Component {
@@ -51,13 +52,6 @@ class App extends Component {
     this.setState({route: route});
   }
 
-
-	callAPI() {
-		fetch("http://localhost:9000/testAPI")
-			.then(res => res.text())
-			.then(res => this.setState({ apiResponse: res }))
-			.catch(err => err);
-	}
 
 	componentDidMount() {
 		// this.callAPI();
@@ -114,7 +108,19 @@ class App extends Component {
 	      .then(res => {
 	        this.setState({result: res})
 	      }).catch(err => {console.log("Empty")})
-    }
+	}
+	// remove = (menu_id) => {
+	// 	fetch('http://localhost:9000/remove', {
+	//       method: 'put',
+	//       headers: {'Content-Type': 'application/json'},
+	//       body: JSON.stringify({
+	// 		user_id: this.state.user.id,
+	// 		menu_id: menu_id
+	//       })
+	//     })
+	//       .then(response => response.json())
+	//       this.fun();
+    // }
 
 	sum = () => {
 		var s = 0;
@@ -143,8 +149,7 @@ class App extends Component {
 							<input onChange = {this.onSPriceChange} className="App field-box" placeholder="Enter Starting Price" type="text"></input>
 							<input onChange = {this.onEPriceChange} className="App field-box" placeholder="Enter Ending Price" type="text"></input>
 							<button onClick = {this.priceFilter} className="App leftbutton">Submit</button>	
-							</div>
-							
+							</div>	
 						   <br/>
 					   </div>
 					   <h3 className='athelas f3'><i><u>MENU</u></i></h3>
@@ -153,7 +158,7 @@ class App extends Component {
 		            </div>
 		          : (
 		          	 route === 'cart'
-		          	 ?  <Cart result = {this.state.result} sum = {this.state.sum} calc ={this.sum}/>
+		          	 ?  <CartList result = {this.state.result} sum = {this.state.sum} calc ={this.sum} ID={this.state.user.id} fun={this.fun}/>
 					 :	
 					 
 					 (
